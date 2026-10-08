@@ -1,6 +1,13 @@
+using APP.Domain;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the IoC (Inversion of Control) container.
+builder.Services.AddDbContext<DbContext, Db>(options => options.UseSqlite(
+    builder.Configuration.GetConnectionString(nameof(Db))
+));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
