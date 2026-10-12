@@ -13,6 +13,7 @@ namespace MVC.Controllers
             _logger = logger;
         }
 
+        // https://127.0.0.1:1970/Home/Index
         public IActionResult Index()
         {
             return View();
