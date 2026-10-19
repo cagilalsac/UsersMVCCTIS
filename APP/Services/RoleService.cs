@@ -12,6 +12,11 @@ namespace APP.Services
         {
         }
 
+        protected override IQueryable<Role> DbQuery()
+        {
+            return base.DbQuery().Include(r => r.UserRoles);
+        }
+
         public IQueryable<RoleResponse> Query()
         {
             var roleEntityQuery = DbQuery(); // select * from Roles
@@ -42,19 +47,36 @@ namespace APP.Services
 
         public RoleRequest Edit(int id)
         {
-            throw new NotImplementedException();
+            var entity = DbSingle(id);
+            if (entity is null)
+                return null;
+            return new RoleRequest
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
         }
-
-        
 
         public CommandResponse Update(RoleRequest request)
         {
-            throw new NotImplementedException();
+            if (DbQuery().Any(role => role.Id != request.Id && role.Name == request.Name.Trim()))
+                return Error("Role with the same name exists!");
+            var entity = DbSingle(request.Id);
+            if (entity is null)
+                return Error("Role not found!");
+            entity.Name = request.Name.Trim();
+            DbUpdate(entity);
+            return Success(entity.Id, "Role updated successfully.");
         }
 
         public CommandResponse Remove(int id)
         {
-            throw new NotImplementedException();
+            var entity = DbSingle(id);
+            if (entity is null)
+                return Error("Role not found!");
+            DbRemove(entity.UserRoles);
+            DbRemove(entity);
+            return Success(entity.Id, "Role deleted successfully.");
         }
     }
 }
