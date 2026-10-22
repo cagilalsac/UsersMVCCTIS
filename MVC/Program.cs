@@ -11,6 +11,7 @@ builder.Services.AddDbContext<DbContext, Db>(options => options.UseSqlite(
     builder.Configuration.GetConnectionString(nameof(Db))
 ));
 builder.Services.AddScoped<IService<RoleRequest, RoleResponse>, RoleService>();
+builder.Services.AddScoped<IService<UserRequest, UserResponse>, UserService>();
 
 builder.Services.AddControllersWithViews();
 
