@@ -1,4 +1,6 @@
-﻿@model UserRequest
+﻿@using APP.Domain
+
+@model UserRequest
 
 @* Generated from Custom MVC Template. *@
 @* Model namespace using directive should be added to _ViewImports.cshtml. *@
@@ -44,7 +46,7 @@
         <div class="row mb-3">
             <label asp-for="Password" class="col-2 col-form-label fw-bold"></label>
 			<div class="col-10">
-			    <input asp-for="Password" class="form-control" />
+			    <input asp-for="Password" class="form-control" type="password" />
 				<span asp-validation-for="Password" class="text-danger"></span>
 			</div>
         </div>
@@ -66,8 +68,8 @@
             <label asp-for="Gender" class="col-2 col-form-label fw-bold"></label>
 			<div class="col-10">
 				<select asp-for="Gender" class="form-select">
-					<option value="@((int)Enum.Value1)">@Enum.Value1</option>
-					<option value="@((int)Enum.Value2)">@Enum.Value2</option>
+					<option value="@((int)Genders.Woman)">@Genders.Woman</option>
+                    <option value="@((int)Genders.Man)">@Genders.Man</option>
 				</select>
 				<span asp-validation-for="Gender" class="text-danger"></span>
 			</div>
@@ -80,24 +82,11 @@
 			</div>
         </div>
         <div class="row mb-3">
-            <label asp-for="RegistrationDate" class="col-2 col-form-label fw-bold"></label>
-			<div class="col-10">
-				<input asp-for="RegistrationDate" class="form-control @dateTimePickerClass" type="text" />
-				<span asp-validation-for="RegistrationDate" class="text-danger"></span>
-			</div>
-        </div>
-        <div class="row mb-3">
             <label asp-for="Score" class="col-2 col-form-label fw-bold"></label>
 			<div class="col-10">
 			    <input asp-for="Score" class="form-control" />
 				<span asp-validation-for="Score" class="text-danger"></span>
 			</div>
-        </div>
-        <div class="row mb-3">
-			<label asp-for="IsOnline" class="col-2 col-form-label fw-bold"></label>
-			<div class="col-10 pt-2">
-				<input class="form-check-input" asp-for="IsOnline" />
-            </div>
         </div>
         <div class="row mb-3">
             <label asp-for="StatusId" class="col-2 col-form-label fw-bold"></label>
@@ -110,15 +99,15 @@
         </div>
 
 @* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. *@
-        @*
+        
         <div class="row mb-3">
-            <label asp-for="EntityIds" class="col-2 col-form-label fw-bold"></label>
+            <label asp-for="RoleIds" class="col-2 col-form-label fw-bold"></label>
 	        <div class="col-10">
-		        <select multiple asp-for="EntityIds" class="form-select" asp-items="ViewBag.EntityIds"></select>
-		        <span asp-validation-for="EntityIds" class="text-danger"></span>
+		        <select multiple asp-for="RoleIds" class="form-select" asp-items="ViewBag.RoleIds"></select>
+		        <span asp-validation-for="RoleIds" class="text-danger"></span>
 	        </div>
         </div>
-        *@
+       
 
         <hr />  
         <div class="row mb-3">

@@ -12,14 +12,15 @@ namespace MVC.Controllers
     {
         // Service injections:
         private readonly IService<UserRequest, UserResponse> _userService;
-        //private readonly IService<StatusRequest, StatusResponse> _statusService;
+        private readonly IService<StatusRequest, StatusResponse> _statusService;
+        // TODO: many to many user roles!
 
         /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
         //private readonly IService<EntityRequest, EntityResponse> _EntityService;
 
         public UsersController(
 			IService<UserRequest, UserResponse> userService
-            //, IService<StatusRequest, StatusResponse> statusService
+            , IService<StatusRequest, StatusResponse> statusService
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
             //, IService<EntityRequest, EntityResponse> EntityService
@@ -40,7 +41,7 @@ namespace MVC.Controllers
             */
 
             // Related items service logic to set ViewData (Id and Name parameters may need to be changed in the SelectList constructor according to the model):
-            //ViewData["StatusId"] = new SelectList(_statusService.List(), "Id", "Name");
+            ViewData["StatusId"] = new SelectList(_statusService.List(), "Id", "Title");
             
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
             //ViewBag.EntityIds = new MultiSelectList(_EntityService.List(), "Id", "Name");

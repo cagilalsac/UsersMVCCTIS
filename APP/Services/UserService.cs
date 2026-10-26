@@ -14,7 +14,23 @@ namespace APP.Services
 
         public CommandResponse Add(UserRequest request)
         {
-            throw new NotImplementedException();
+            if (DbQuery().Any(u => u.UserName == request.UserName.Trim()))
+                return Error("User with the same user name exists!");
+            var entity = new User
+            {
+                BirthDate = request.BirthDate,
+                FirstName = request.FirstName?.Trim(),
+                LastName = request.LastName?.Trim(),
+                Gender = request.Gender,
+                Password = request.Password.Trim(),
+                RegistrationDate = DateTime.Now,
+                UserName = request.UserName.Trim(),
+                StatusId = request.StatusId ?? 0,
+                Score = request.Score,
+                RoleIds = request.RoleIds,
+            };
+            DbAdd(entity);
+            return Success(entity.Id, "User created successfully.");
         }
 
         public UserRequest Edit(int id)
