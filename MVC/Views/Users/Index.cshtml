@@ -68,7 +68,10 @@
                             @Html.DisplayNameFor(model => model.IsOnlineR)
                         </th>
                         <th>
-                            @* @Html.DisplayNameFor(model => model.Status) *@
+                            @Html.DisplayNameFor(model => model.StatusTitleR)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RoleNamesR)
                         </th>
                         <th></th>
                     </tr>
@@ -101,8 +104,11 @@
 						        @Html.DisplayFor(modelItem => item.IsOnlineR)
 					        </td>
 					        <td>
-						        @* @Html.DisplayFor(modelItem => item.Status) *@
+						        @Html.DisplayFor(modelItem => item.StatusTitleR)
 					        </td>
+                            <td>
+                                @Html.Raw(item.RoleNamesR)
+                            </td>
 					        <td class="text-end w-25">
 						        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
 						        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;

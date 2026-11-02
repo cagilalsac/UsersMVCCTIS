@@ -27,7 +27,7 @@ namespace MVC.Controllers
         )
         {
             _userService = userService;
-            //_statusService = statusService;
+            _statusService = statusService;
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
             //_EntityService = EntityService;

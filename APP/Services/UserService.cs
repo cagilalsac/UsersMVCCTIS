@@ -38,6 +38,14 @@ namespace APP.Services
             throw new NotImplementedException();
         }
 
+        protected override IQueryable<User> DbQuery()
+        {
+            return base.DbQuery().Include(u => u.Status)
+                .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                .OrderByDescending(u => u.RegistrationDate).ThenByDescending(u => u.Score)
+                .ThenBy(u => u.UserName);
+        }
+
         public IQueryable<UserResponse> Query()
         {
             return DbQuery().Select(u => new UserResponse
@@ -62,7 +70,9 @@ namespace APP.Services
                 GenderR = u.Gender.ToString(),
                 RegistrationDateR = u.RegistrationDate.ToString("MM/dd/yyyy HH:mm:ss"),
                 BirthDateR = u.BirthDate.HasValue ? u.BirthDate.Value.ToShortDateString()
-                    : string.Empty
+                    : string.Empty,
+                StatusTitleR = u.Status.Title,
+                RoleNamesR = string.Join("<br>", u.UserRoles.Select(ur => ur.Role.Name))
             });
         }
 

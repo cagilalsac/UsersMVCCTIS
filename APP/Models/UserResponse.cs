@@ -51,5 +51,11 @@ namespace APP.Models
 
         [DisplayName("Is Online?")]
         public string IsOnlineR { get; set; }
+
+        [DisplayName("Status")]
+        public string StatusTitleR { get; set; }
+
+        [DisplayName("Roles")]
+        public string RoleNamesR { get; set; }
     }
 }
