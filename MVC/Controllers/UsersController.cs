@@ -16,21 +16,21 @@ namespace MVC.Controllers
         // TODO: many to many user roles!
 
         /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-        //private readonly IService<EntityRequest, EntityResponse> _EntityService;
+        private readonly IService<RoleRequest, RoleResponse> _roleService;
 
         public UsersController(
 			IService<UserRequest, UserResponse> userService
             , IService<StatusRequest, StatusResponse> statusService
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //, IService<EntityRequest, EntityResponse> EntityService
+            , IService<RoleRequest, RoleResponse> roleService
         )
         {
             _userService = userService;
             _statusService = statusService;
 
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //_EntityService = EntityService;
+            _roleService = roleService;
         }
 
         private void SetViewData()
@@ -42,9 +42,9 @@ namespace MVC.Controllers
 
             // Related items service logic to set ViewData (Id and Name parameters may need to be changed in the SelectList constructor according to the model):
             ViewData["StatusId"] = new SelectList(_statusService.List(), "Id", "Title");
-            
+
             /* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. */
-            //ViewBag.EntityIds = new MultiSelectList(_EntityService.List(), "Id", "Name");
+            ViewBag.RoleIds = new MultiSelectList(_roleService.List(), "Id", "Name");
         }
 
         private void SetTempData(string message, string key = "Message")

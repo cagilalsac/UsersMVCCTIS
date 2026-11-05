@@ -29,7 +29,8 @@ namespace APP.Models
         [DisplayName("Birth Date")]
         public DateTime? BirthDate { get; set; }
 
-        public double Score { get; set; }
+        [Required(ErrorMessage = "{0} is required!")]
+        public double? Score { get; set; }
 
         [DisplayName("Status")]
         [Required(ErrorMessage = "{0} is required!")]
@@ -37,6 +38,6 @@ namespace APP.Models
 
         [DisplayName("Roles")]
         [Required(ErrorMessage = "{0} is required!")]
-        public List<int> RoleIds { get; set; } = new();
+        public List<int> RoleIds { get; set; }
     }
 }
