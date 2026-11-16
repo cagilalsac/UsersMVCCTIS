@@ -16,6 +16,11 @@ namespace APP.Authentication.Services
             _cookieAuthService = cookieAuthService;
         }
 
+        protected override IQueryable<User> DbQuery()
+        {
+            return base.DbQuery().Include(u => u.UserRoles).ThenInclude(ur => ur.Role);
+        }
+
         public async Task<CommandResponse> Login(LoginRequest request)
         {
             var userEntity = DbSingle(u => u.UserName == request.UserName

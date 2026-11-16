@@ -37,7 +37,10 @@
                     @Model.Count() record(s) found.
                 </div>
                 <div class="col-2 text-end">
-                    <a asp-action="Create">Create</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Create">Create</a>
+                    }
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -77,43 +80,48 @@
                     </tr>
                 </thead>
                 <tbody>
-		            @foreach (var item in Model) {
-				        <tr>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.UserName)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.PasswordR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.FullNameR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.GenderR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.BirthDateR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.RegistrationDateR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.ScoreR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.IsOnlineR)
-					        </td>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.StatusTitleR)
-					        </td>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PasswordR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FullNameR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GenderR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BirthDateR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegistrationDateR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ScoreR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsOnlineR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StatusTitleR)
+                            </td>
                             <td>
                                 @Html.Raw(item.RoleNamesR)
                             </td>
-					        <td class="text-end w-25">
-						        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
-						        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;
-						        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-					        </td>
+                            <td class="text-end w-25">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    @:&nbsp;|&nbsp;
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    @:&nbsp;|&nbsp;
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </td>
 				        </tr>
 		            }
                 </tbody>

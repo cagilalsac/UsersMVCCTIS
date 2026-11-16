@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE.Services;
 using APP.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // Generated from Custom MVC Template.
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         // Service injections:
@@ -73,6 +75,7 @@ namespace MVC.Controllers
         }
 
         // GET: Users/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             SetViewData(); // set ViewData dictionary to carry extra data other than the model to the view
@@ -81,6 +84,7 @@ namespace MVC.Controllers
 
         // POST: Users/Create
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(UserRequest user)
         {
             if (ModelState.IsValid) // check data annotation validation errors in the request
@@ -99,6 +103,7 @@ namespace MVC.Controllers
         }
 
         // GET: Users/Edit/5
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             // Get item to edit service logic:
@@ -109,6 +114,7 @@ namespace MVC.Controllers
 
         // POST: Users/Edit
         [HttpPost, ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(UserRequest user)
         {
             if (ModelState.IsValid) // check data annotation validation errors in the request
@@ -127,6 +133,7 @@ namespace MVC.Controllers
         }
 
         // GET: Users/Delete/5
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             // Get item to delete service logic:
@@ -136,6 +143,7 @@ namespace MVC.Controllers
 
         // POST: Users/Delete
         [HttpPost, ValidateAntiForgeryToken, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(int id)
         {
             // Delete item service logic:

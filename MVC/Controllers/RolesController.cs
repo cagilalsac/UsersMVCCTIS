@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CORE.Services;
 using APP.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // Generated from Custom MVC Template.
 
 namespace MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         // Service injections:

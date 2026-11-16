@@ -37,7 +37,10 @@
                     @Model.Count() record(s) found.
                 </div>
                 <div class="col-2 text-end">
-                    <a asp-action="Create">Create</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Create">Create</a>
+                    }
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -53,19 +56,24 @@
                     </tr>
                 </thead>
                 <tbody>
-		            @foreach (var item in Model) {
-				        <tr>
-					        <td>
-						        @Html.DisplayFor(modelItem => item.Title)
-					        </td>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserCountR)
                             </td>
-					        <td class="text-end w-25">
-						        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
-						        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;
-						        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-					        </td>
+                            <td class="text-end w-25">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                    <text>&nbsp;|&nbsp;</text>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    @:&nbsp;|&nbsp;
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </td>
 				        </tr>
 		            }
                 </tbody>
